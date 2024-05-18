@@ -1,0 +1,1012 @@
+openapi: 3.0.0
+info:
+  title: Product Analysis API
+  description: >
+    This API provides a comprehensive suite of endpoints to analyze various aspects of e-commerce data,
+    focusing on product performance, inventory management, order fulfillment, customer behavior, and regional sales.
+    It leverages BigQuery to execute SQL queries and returns the results in a structured JSON format.
+  version: 1.0.0
+servers:
+  - url: https://product-analysis-api-lvgv7dfb6a-uc.a.run.app
+paths:
+  /top_selling_products:
+    get:
+      summary: Get the top 10 selling products
+      operationId: getTopSellingProducts
+      responses:
+        '200':
+          description: Top selling products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  top_selling_products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        quantity_sold:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /least_selling_products:
+    get:
+      summary: Get the 10 least selling products
+      operationId: getLeastSellingProducts
+      responses:
+        '200':
+          description: Least selling products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  least_selling_products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        quantity_sold:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /average_product_cost_by_category:
+    get:
+      summary: Get the average product cost by category
+      operationId: getAverageProductCostByCategory
+      responses:
+        '200':
+          description: Average product cost by category retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  average_product_cost_by_category:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category:
+                          type: string
+                        average_cost:
+                          type: number
+      security:
+        - BearerAuth: []
+  /total_revenue_by_product:
+    get:
+      summary: Get the total revenue by product
+      operationId: getTotalRevenueByProduct
+      responses:
+        '200':
+          description: Total revenue by product retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_revenue_by_product:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        total_revenue:
+                          type: number
+      security:
+        - BearerAuth: []
+  /profit_margin_by_product:
+    get:
+      summary: Get the profit margin by product
+      operationId: getProfitMarginByProduct
+      responses:
+        '200':
+          description: Profit margin by product retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  profit_margin_by_product:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        profit_margin:
+                          type: number
+      security:
+        - BearerAuth: []
+  /highest_profit_margin_products:
+    get:
+      summary: Get the top 10 products with the highest profit margins
+      operationId: getHighestProfitMarginProducts
+      responses:
+        '200':
+          description: Highest profit margin products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  highest_profit_margin_products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        profit_margin:
+                          type: number
+      security:
+        - BearerAuth: []
+  /lowest_profit_margin_products:
+    get:
+      summary: Get the 10 products with the lowest profit margins
+      operationId: getLowestProfitMarginProducts
+      responses:
+        '200':
+          description: Lowest profit margin products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lowest_profit_margin_products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        profit_margin:
+                          type: number
+      security:
+        - BearerAuth: []
+  /average_sale_price_by_category:
+    get:
+      summary: Get the average sale price by category
+      operationId: getAverageSalePriceByCategory
+      responses:
+        '200':
+          description: Average sale price by category retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  average_sale_price_by_category:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category:
+                          type: string
+                        average_sale_price:
+                          type: number
+      security:
+        - BearerAuth: []
+  /product_distribution_by_brand:
+    get:
+      summary: Get the product distribution by brand
+      operationId: getProductDistributionByBrand
+      responses:
+        '200':
+          description: Product distribution by brand retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product_distribution_by_brand:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        brand:
+                          type: string
+                        product_count:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /product_count_by_department:
+    get:
+      summary: Get the product count by department
+      operationId: getProductCountByDepartment
+      responses:
+        '200':
+          description: Product count by department retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product_count_by_department:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        department:
+                          type: string
+                        product_count:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /all_products:
+    get:
+      summary: Get all products
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: All products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  all_products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+      security:
+        - BearerAuth: []
+  /product_details:
+    get:
+      summary: Get product details
+      operationId: getProductDetails
+      parameters:
+        - in: query
+          name: product_id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the product
+      responses:
+        '200':
+          description: Product details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product_details:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: Invalid product_id
+      security:
+        - BearerAuth: []
+  /current_stock_level:
+    get:
+      summary: Get the current stock level for each product
+      operationId: getCurrentStockLevel
+      responses:
+        '200':
+          description: Current stock level retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  current_stock_level:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        stock_level:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /low_stock_products:
+    get:
+      summary: Get products with stock levels below a threshold
+      operationId: getLowStockProducts
+      parameters:
+        - in: query
+          name: stock_threshold
+          required: true
+          schema:
+            type: integer
+          description: The stock threshold
+      responses:
+        '200':
+          description: Low stock products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  low_stock_products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        stock_level:
+                          type: integer
+        '400':
+          description: Invalid stock_threshold
+      security:
+        - BearerAuth: []
+  /average_selling_time:
+    get:
+      summary: Get the average selling time for each product
+      operationId: getAverageSellingTime
+      responses:
+        '200':
+          description: Average selling time retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  average_selling_time:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        average_selling_time:
+                          type: number
+      security:
+        - BearerAuth: []
+  /longest_selling_products:
+    get:
+      summary: Get the top 10 products with the longest average selling time
+      operationId: getLongestSellingProducts
+      responses:
+        '200':
+          description: Longest selling products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  longest_selling_products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        average_selling_time:
+                          type: number
+      security:
+        - BearerAuth: []
+  /total_unsold_inventory_value:
+    get:
+      summary: Get the total value of unsold inventory
+      operationId: getTotalUnsoldInventoryValue
+      responses:
+        '200':
+          description: Total unsold inventory value retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_unsold_inventory_value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        total_unsold_inventory_value:
+                          type: number
+      security:
+        - BearerAuth: []
+  /inventory_by_distribution_center:
+    get:
+      summary: Get the inventory distribution by distribution center
+      operationId: getInventoryByDistributionCenter
+      responses:
+        '200':
+          description: Inventory by distribution center retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inventory_by_distribution_center:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        inventory_count:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /all_inventory_item_ids:
+    get:
+      summary: Get all inventory item IDs
+      operationId: getAllInventoryItemIds
+      responses:
+        '200':
+          description: All inventory item IDs retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  all_inventory_item_ids:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /inventory_item_details:
+    get:
+      summary: Get inventory item details
+      operationId: getInventoryItemDetails
+      parameters:
+        - in: query
+          name: inventory_item_id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the inventory item
+      responses:
+        '200':
+          description: Inventory item details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inventory_item_details:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: Invalid inventory_item_id
+      security:
+        - BearerAuth: []
+  /total_revenue_by_period:
+    get:
+      summary: Get the total revenue for a period
+      operationId: getTotalRevenueByPeriod
+      parameters:
+        - in: query
+          name: start_date
+          required: true
+          schema:
+            type: string
+            format: date
+          description: The start date of the period
+        - in: query
+          name: end_date
+          required: true
+          schema:
+            type: string
+            format: date
+          description: The end date of the period
+      responses:
+        '200':
+          description: Total revenue by period retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_revenue_by_period:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        total_revenue:
+                          type: number
+        '400':
+          description: Invalid start_date or end_date
+      security:
+        - BearerAuth: []
+  /average_order_value:
+    get:
+      summary: Get the average order value
+      operationId: getAverageOrderValue
+      responses:
+        '200':
+          description: Average order value retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  average_order_value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        average_order_value:
+                          type: number
+      security:
+        - BearerAuth: []
+  /order_count_by_month:
+    get:
+      summary: Get the order count by month
+      operationId: getOrderCountByMonth
+      responses:
+        '200':
+          description: Order count by month retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_count_by_month:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        month:
+                          type: string
+                        order_count:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /order_distribution_by_status:
+    get:
+      summary: Get the order distribution by status
+      operationId: getOrderDistributionByStatus
+      responses:
+        '200':
+          description: Order distribution by status retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_distribution_by_status:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        order_count:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /average_shipping_time:
+    get:
+      summary: Get the average shipping time
+      operationId: getAverageShippingTime
+      responses:
+        '200':
+          description: Average shipping time retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  average_shipping_time:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        average_shipping_time:
+                          type: number
+      security:
+        - BearerAuth: []
+  /return_rate_by_product:
+    get:
+      summary: Get the return rate by product
+      operationId: getReturnRateByProduct
+      responses:
+        '200':
+          description: Return rate by product retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  return_rate_by_product:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        return_rate:
+                          type: number
+      security:
+        - BearerAuth: []
+  /highest_return_rate_products:
+    get:
+      summary: Get the top 10 products with the highest return rates
+      operationId: getHighestReturnRateProducts
+      responses:
+        '200':
+          description: Highest return rate products retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  highest_return_rate_products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        return_rate:
+                          type: number
+      security:
+        - BearerAuth: []
+  /all_order_ids:
+    get:
+      summary: Get all order IDs
+      operationId: getAllOrderIds
+      responses:
+        '200':
+          description: All order IDs retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  all_order_ids:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        order_id:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /order_details:
+    get:
+      summary: Get order details
+      operationId: getOrderDetails
+      parameters:
+        - in: query
+          name: order_id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the order
+      responses:
+        '200':
+          description: Order details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_details:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: Invalid order_id
+      security:
+        - BearerAuth: []
+  /customer_distribution_by_age:
+    get:
+      summary: Get the customer distribution by age group
+      operationId: getCustomerDistributionByAge
+      responses:
+        '200':
+          description: Customer distribution by age retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer_distribution_by_age:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        age_group:
+                          type: string
+                        customer_count:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /customer_gender_distribution:
+    get:
+      summary: Get the customer distribution by gender
+      operationId: getCustomerGenderDistribution
+      responses:
+        '200':
+          description: Customer gender distribution retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer_gender_distribution:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        gender:
+                          type: string
+                        customer_count:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /average_customer_lifetime_value:
+    get:
+      summary: Get the average customer lifetime value
+      operationId: getAverageCustomerLifetimeValue
+      responses:
+        '200':
+          description: Average customer lifetime value retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  average_customer_lifetime_value:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        average_customer_lifetime_value:
+                          type: number
+      security:
+        - BearerAuth: []
+  /highest_lifetime_value_customers:
+    get:
+      summary: Get the top 10 customers with the highest lifetime values
+      operationId: getHighestLifetimeValueCustomers
+      responses:
+        '200':
+          description: Highest lifetime value customers retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  highest_lifetime_value_customers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        total_spent:
+                          type: number
+      security:
+        - BearerAuth: []
+  /customer_churn_rate:
+    get:
+      summary: Get the customer churn rate for a period
+      operationId: getCustomerChurnRate
+      parameters:
+        - in: query
+          name: start_date
+          required: true
+          schema:
+            type: string
+            format: date
+          description: The start date of the period
+        - in: query
+          name: end_date
+          required: true
+          schema:
+            type: string
+            format: date
+          description: The end date of the period
+      responses:
+        '200':
+          description: Customer churn rate retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer_churn_rate:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        churn_rate:
+                          type: number
+        '400':
+          description: Invalid start_date or end_date
+      security:
+        - BearerAuth: []
+  /customer_acquisition_by_source:
+    get:
+      summary: Get the customer acquisition by traffic source
+      operationId: getCustomerAcquisitionBySource
+      responses:
+        '200':
+          description: Customer acquisition by source retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customer_acquisition_by_source:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        traffic_source:
+                          type: string
+                        customer_count:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /all_user_ids:
+    get:
+      summary: Get all user IDs
+      operationId: getAllUserIds
+      responses:
+        '200':
+          description: All user IDs retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  all_user_ids:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /user_details:
+    get:
+      summary: Get user details
+      operationId: getUserDetails
+      parameters:
+        - in: query
+          name: user_id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the user
+      responses:
+        '200':
+          description: User details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_details:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: Invalid user_id
+      security:
+        - BearerAuth: []
+  /top_states_by_customer_count:
+    get:
+      summary: Get the top 10 states with the highest customer counts
+      operationId: getTopStatesByCustomerCount
+      responses:
+        '200':
+          description: Top states by customer count retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  top_states_by_customer_count:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        state:
+                          type: string
+                        customer_count:
+                          type: integer
+      security:
+        - BearerAuth: []
+  /revenue_by_state:
+    get:
+      summary: Get the revenue by state
+      operationId: getRevenueByState
+      responses:
+        '200':
+          description: Revenue by state retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  revenue_by_state:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        state:
+                          type: string
+                        total_revenue:
+                          type: number
+      security:
+        - BearerAuth: []
+  /all_distribution_centers:
+    get:
+      summary: Get all distribution centers
+      operationId: getAllDistributionCenters
+      responses:
+        '200':
+          description: All distribution centers retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  all_distribution_centers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+      security:
+        - BearerAuth: []
+  /distribution_center_details:
+    get:
+      summary: Get distribution center details
+      operationId: getDistributionCenterDetails
+      parameters:
+        - in: query
+          name: distribution_center_id
+          required: true
+          schema:
+            type: integer
+          description: The ID of the distribution center
+      responses:
+        '200':
+          description: Distribution center details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  distribution_center_details:
+                    type: array
+                    items:
+                      type: object
+        '400':
+          description: Invalid distribution_center_id
+      security:
+        - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >
+        JWT tokens must include a custom audience (aud) claim specifying the API's URL
+        for successful authentication.
